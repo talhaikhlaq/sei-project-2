@@ -2,6 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const dotenv = require('dotenv-webpack')
 
 module.exports = {
   entry: './src/app.js',
@@ -41,6 +42,7 @@ module.exports = {
     }),
     new CopyWebpackPlugin([
       { from: './src/assets', to: 'assets' }
-    ])
+    ]),
+    new dotenv()
   ]
 }

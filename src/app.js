@@ -1,7 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-
+// import axios from 'axios'
 import Phrases from './components/Phrases'
+import PickLanguage from './components/PickLanguage'
 
 
 class App extends React.Component {
@@ -9,13 +10,19 @@ class App extends React.Component {
   constructor(){
     super()
 
-    this.state = {}
+    this.state = {
+
+
+    }
   }
 
 
   render(){
     return(
-      <Phrases />
+      <main>
+        <Phrases />
+        <PickLanguage />
+      </main>
     )
   }
 
