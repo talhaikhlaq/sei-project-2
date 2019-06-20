@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import axios from 'axios'
 import './styles/style.scss'
 import 'bulma'
+
 // import Phrases from './components/Phrases'
 // import PickLanguage from './components/PickLanguage'
 
@@ -73,17 +74,17 @@ class App extends React.Component {
     this.setState({phrase: newPhrase})
   }
 
-  getLanguages(e){
-
-    axios.get('https://translate.yandex.net/api/v1.5/tr.json/getLangs', {
-      params: {
-        key: yandexKey,
-        ui: e.target.value
-      }
-    })
-      .then(res => console.log(res.data))
-      .catch(err => console.log(err))
-  }
+  // getLanguages(e){
+  //
+  //   axios.get('https://translate.yandex.net/api/v1.5/tr.json/getLangs', {
+  //     params: {
+  //       key: yandexKey,
+  //       ui: e.target.value
+  //     }
+  //   })
+  //     .then(res => console.log(res.data))
+  //     .catch(err => console.log(err))
+  // }
 
 
 
@@ -206,9 +207,7 @@ class App extends React.Component {
             </div>
           </div>
 
-
         </section>
-
       </main>
     )
   }
