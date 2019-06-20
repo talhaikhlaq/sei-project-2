@@ -37,9 +37,12 @@ class App extends React.Component {
         'It is not yet Christmas.'
       ],
       phrase: 'Where is the Police?',
-      translated: ''
+      translated: 'Wo ist die Polizei?',
+      toTranslate: ''
 
     }
+
+    this.handleChange = this.handleChange.bind(this)
   }
 
   randomPhrase(){
@@ -59,18 +62,35 @@ class App extends React.Component {
       .catch(err => console.log(err))
   }
 
+  handleChange(e){
+    const word = e.target.value
+    this.setState({toTranslate: word})
+  }
+
+  handleSubmit(e){
+    e.preventDefault()
+
+    const newPhrase = this.state.toTranslate
+    this.setState({phrase: newPhrase})
+  }
+
+
+  componentDidMount(){
+    console.log(this.state.toTranslate)
+  }
 
   render(){
+
     return(
       <main>
-        <section className="hero">
+        <section className="hero is-warning">
           <div className="hero-body">
             <div className="container ">
-              <h1 className="title has-text-centered">
-                How To Say...
+              <h1 className="title has-text-centered is-size-1">
+                Random Phrases Translator
               </h1>
-              <h2 className="subtitle has-text-centered">
-                Generate a random phrase or write your own
+              <h2 className="subtitle has-text-centered is-size-3">
+                Generate a phrase or write your own
               </h2>
             </div>
           </div>
@@ -79,7 +99,7 @@ class App extends React.Component {
           <div className="columns">
             <div className="column is-6">
               <div>
-                <h2 className="has-text-centered">
+                <h2 className="has-text-centered is-size-3">
                   {this.state.phrase}
                 </h2>
               </div>
@@ -94,6 +114,10 @@ class App extends React.Component {
             </div>
           </div>
           <hr/>
+          <div className="has-text-centered">
+            <h1 className="is-size-1">{this.state.translated}</h1>
+          </div>
+
         </section>
 
         <div>
@@ -103,7 +127,9 @@ class App extends React.Component {
             onChange={this.handleChange}
           ></textarea>
           <div className="has-text-centered">
-            <button type="submit" className="button">Submit</button>
+            <button type="submit" className="button" onClick={(e) =>{
+              this.handleSubmit(e)
+            }}>Submit</button>
           </div>
           <hr/>
         </div>
@@ -161,11 +187,7 @@ class App extends React.Component {
 
             </div>
           </div>
-
-
-          <div className="has-text-centered">
-            <h1>{this.state.translated}</h1>
-          </div>
+          <hr/>
 
         </section>
 
