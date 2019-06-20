@@ -18,14 +18,14 @@ class App extends React.Component {
     this.state = {
       data: [
         'Where is the Police?',
-        'Thank you but no.',
+        'Thank you, but no thank you.',
         'Can you go away I am on holiday.',
         'Can I borrow your wifi?',
         'Which one is your spiciest dish?',
         'Dogs are better than Cats. Change my mind.',
         'That is a heavy bag of rubbish.',
         'I am chuffed to bits, like this cat right here.',
-        'Do you have Ice Latte?',
+        'Can I have a Caramel Ice Latte and the Smoked Salmon Baguette?',
         'Blimey, that is a lot of ice cream.',
         'Your house is exquisite.',
         'What do you mean, there is no tap water?',
@@ -34,11 +34,12 @@ class App extends React.Component {
         'You are such an amazing human being.',
         'Hold my beer.',
         'It is not yet Christmas.',
-        'The zebra ran away.'
+        'The Zebra ran away as the Hunter went for a piss.'
       ],
       phrase: 'Where is the Police?',
-      translated: 'Wo ist die Polizei?',
-      toTranslate: ''
+      translated: '-',
+      toTranslate: '',
+      language: 'Pick a Language'
 
     }
 
@@ -51,6 +52,7 @@ class App extends React.Component {
   }
 
   translate(e){
+    this.setState({ language: e.target.textContent })
     axios.get('https://cors-anywhere.herokuapp.com/https://translate.yandex.net/api/v1.5/tr.json/translate', {
       params: {
         key: yandexKey,
@@ -74,21 +76,22 @@ class App extends React.Component {
     this.setState({phrase: newPhrase})
   }
 
-  // getLanguages(e){
-  //
-  //   axios.get('https://translate.yandex.net/api/v1.5/tr.json/getLangs', {
-  //     params: {
-  //       key: yandexKey,
-  //       ui: e.target.value
-  //     }
-  //   })
-  //     .then(res => console.log(res.data))
-  //     .catch(err => console.log(err))
-  // }
+  getLanguages(){
+
+    axios.get('https://translate.yandex.net/api/v1.5/tr.json/getLangs', {
+      params: {
+        key: yandexKey,
+        ui: 'de'
+      }
+    })
+      .then(res => console.log(res.data))
+      .catch(err => console.log(err))
+  }
 
 
 
   componentDidMount(){
+    this.getLanguages()
     console.log(this.state.toTranslate)
   }
 
@@ -96,7 +99,7 @@ class App extends React.Component {
 
     return(
       <main>
-        <section className="hero is-warning">
+        <section className="hero is-medium">
           <div className="hero-body">
             <div className="container ">
               <h1 className="title has-text-centered is-size-1 has-text-light">
@@ -112,23 +115,26 @@ class App extends React.Component {
           <div className="columns">
             <div className="column is-6">
               <div>
-                <h2 className="has-text-centered is-size-3">
+                <h2 className="has-text-dark has-text-centered is-size-4">
                   {this.state.phrase}
                 </h2>
               </div>
             </div>
             <div className="column is-6">
               <div className="has-text-centered">
-                <button className="button"
+                <button className="button has-text-weight-bold has-text-grey"
                   onClick={() => {
                     this.randomPhrase()
                   }}>New Phrase</button>
               </div>
             </div>
           </div>
-          <div className="has-text-centered">
-            <h1 className="is-size-1">{this.state.translated}</h1>
-          </div>
+          {this.state.translated && this.state.language &&
+            <div className="has-text-centered">
+              <h1 className="has-text-link is-size-3">{this.state.translated}</h1>
+              <h2 className="is-size-5">{this.state.language} </h2>
+            </div>
+          }
 
         </section>
 
@@ -203,10 +209,43 @@ class App extends React.Component {
               <button className="button is-outlined" onClick={(e) => {
                 this.translate(e)
               }} value='hi'>Hindi</button>
+              <button className="button is-outlined" onClick={(e) => {
+                this.translate(e)
+              }} value='el'>Greek</button>
+              <button className="button is-outlined" onClick={(e) => {
+                this.translate(e)
+              }} value='fa'>Persian</button>
+              <button className="button is-outlined" onClick={(e) => {
+                this.translate(e)
+              }} value='hu'>Hungarian</button>
+              <button className="button is-outlined" onClick={(e) => {
+                this.translate(e)
+              }} value='is'>Icelandic</button>
+              <button className="button is-outlined" onClick={(e) => {
+                this.translate(e)
+              }} value='nl'>Dutch</button>
+              <button className="button is-outlined" onClick={(e) => {
+                this.translate(e)
+              }} value='th'>Thai</button>
+              <button className="button is-outlined" onClick={(e) => {
+                this.translate(e)
+              }} value='sv'>Swedish</button>
+              <button className="button is-outlined" onClick={(e) => {
+                this.translate(e)
+              }} value='cs'>Czech</button>
 
             </div>
           </div>
+        </section>
 
+        <section className="hero">
+          <div className="hero-header">
+            <div className="container">
+              <div className="content has-text-centered">
+                <h5 className="has-text-info">Made at GA 💣 DT & TI</h5>
+              </div>
+            </div>
+          </div>
         </section>
       </main>
     )
