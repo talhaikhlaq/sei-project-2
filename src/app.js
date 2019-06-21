@@ -85,6 +85,10 @@ class App extends React.Component {
     this.setState({phrase: newPhrase})
   }
 
+  // handleClick(){
+  //   return
+  // }
+
   getCountriesData(){
     axios.get('https://restcountries.eu/rest/v2/all')
       .then(res => this.setState({ countries: res.data }))
@@ -144,7 +148,7 @@ class App extends React.Component {
             <div className="has-text-centered">
               <h1 className="has-text-link is-size-3">{this.state.translated}</h1>
               <h2 className="is-size-5">{this.state.language} </h2>
-              <div className="emptyFlag">{this.state.langCode && <img className="flagImage" src={this.findCountry().flag}/>}</div>
+              <div className="emptyFlag">{this.state.langCode && <img className="flagImage" src={this.findCountry().flag} />}</div>
             </div>
           }
 
