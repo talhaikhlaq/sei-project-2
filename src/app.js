@@ -4,6 +4,7 @@ import axios from 'axios'
 import './styles/style.scss'
 import 'bulma'
 
+
 // import Phrases from './components/Phrases'
 // import PickLanguage from './components/PickLanguage'
 
@@ -39,7 +40,10 @@ class App extends React.Component {
       phrase: 'Where is the Police?',
       translated: '-',
       toTranslate: '',
-      language: 'Pick a Language'
+      language: 'Pick a Language',
+      countries: [],
+      langCode: '',
+      countryName: ''
 
     }
 
@@ -52,7 +56,7 @@ class App extends React.Component {
   }
 
   translate(e){
-    this.setState({ language: e.target.textContent })
+    e.persist()
     axios.get('https://cors-anywhere.herokuapp.com/https://translate.yandex.net/api/v1.5/tr.json/translate', {
       params: {
         key: yandexKey,
@@ -60,7 +64,12 @@ class App extends React.Component {
         text: this.state.phrase
       }
     })
-      .then(res => this.setState({translated: res.data.text}))
+      .then(res => this.setState({
+        translated: res.data.text,
+        language: e.target.textContent,
+        langCode: e.target.value,
+        countryName: e.target.dataset.name
+      }))
       .catch(err => console.log(err))
   }
 
@@ -76,23 +85,24 @@ class App extends React.Component {
     this.setState({phrase: newPhrase})
   }
 
-  getLanguages(){
-
-    axios.get('https://translate.yandex.net/api/v1.5/tr.json/getLangs', {
-      params: {
-        key: yandexKey,
-        ui: 'de'
-      }
-    })
-      .then(res => console.log(res.data))
+  getCountriesData(){
+    axios.get('https://restcountries.eu/rest/v2/all')
+      .then(res => this.setState({ countries: res.data }))
       .catch(err => console.log(err))
   }
 
 
-
   componentDidMount(){
-    this.getLanguages()
+    console.log(this.state.countryName)
+    this.getCountriesData()
     console.log(this.state.toTranslate)
+  }
+
+  findCountry() {
+    console.log(this.state.countries)
+    if (!this.state.langCode) return null
+    return this.state.countries.find(country => country.name === this.state.countryName)
+    // return this.state.countries.find(country => country.languages[0].iso639_1 === this.state.langCode)
   }
 
   render(){
@@ -129,10 +139,12 @@ class App extends React.Component {
               </div>
             </div>
           </div>
+
           {this.state.translated && this.state.language &&
             <div className="has-text-centered">
               <h1 className="has-text-link is-size-3">{this.state.translated}</h1>
               <h2 className="is-size-5">{this.state.language} </h2>
+              <div className="emptyFlag">{this.state.langCode && <img className="flagImage" src={this.findCountry().flag}/>}</div>
             </div>
           }
 
@@ -166,73 +178,73 @@ class App extends React.Component {
             <div>
               <button className="button is-outlined" onClick={(e) => {
                 this.translate(e)
-              }} value='de'>German</button>
+              }} value='de' data-name="Germany">German</button>
               <button className="button is-outlined" onClick={(e) => {
                 this.translate(e)
-              }} value='fr'>French</button>
+              }} value='fr' data-name="France">French</button>
               <button className="button is-outlined" onClick={(e) => {
                 this.translate(e)
-              }} value='es'>Spanish</button>
+              }} value='es' data-name="Spain">Spanish</button>
               <button className="button is-outlined" onClick={(e) => {
                 this.translate(e)
-              }} value='it'>Italian</button>
+              }} value='it' data-name="Italy">Italian</button>
               <button className="button is-outlined" onClick={(e) => {
                 this.translate(e)
-              }} value='ko'>Korean</button>
+              }} value='ko' data-name="Korea (Republic of)">Korean</button>
               <button className="button is-outlined" onClick={(e) => {
                 this.translate(e)
-              }} value='zh'>Chinese</button>
+              }} value='zh' data-name="China">Chinese</button>
               <button className="button is-outlined" onClick={(e) => {
                 this.translate(e)
-              }} value='ja'>Japanese</button>
+              }} value='ja' data-name="Japan">Japanese</button>
               <button className="button is-outlined" onClick={(e) => {
                 this.translate(e)
-              }} value='ar'>Arabic</button>
+              }} value='ar' data-name="Saudi Arabia">Arabic</button>
               <button className="button is-outlined" onClick={(e) => {
                 this.translate(e)
-              }} value='ur'>Urdu</button>
+              }} value='ur' data-name="Pakistan">Urdu</button>
               <button className="button is-outlined" onClick={(e) => {
                 this.translate(e)
-              }} value='ru'>Russian</button>
+              }} value='ru' data-name="Russian Federation">Russian</button>
               <button className="button is-outlined" onClick={(e) => {
                 this.translate(e)
-              }} value='pl'>Polish</button>
+              }} value='pl' data-name="Poland">Polish</button>
               <button className="button is-outlined" onClick={(e) => {
                 this.translate(e)
-              }} value='da'>Danish</button>
+              }} value='da' data-name="Denmark">Danish</button>
               <button className="button is-outlined" onClick={(e) => {
                 this.translate(e)
-              }} value='no'>Norweigian</button>
+              }} value='no' data-name="Norway">Norweigian</button>
               <button className="button is-outlined" onClick={(e) => {
                 this.translate(e)
-              }} value='id'>Indonesian</button>
+              }} value='id' data-name="Indonesia">Indonesian</button>
               <button className="button is-outlined" onClick={(e) => {
                 this.translate(e)
-              }} value='hi'>Hindi</button>
+              }} value='hi' data-name="India">Hindi</button>
               <button className="button is-outlined" onClick={(e) => {
                 this.translate(e)
-              }} value='el'>Greek</button>
+              }} value='el' data-name="Greece">Greek</button>
               <button className="button is-outlined" onClick={(e) => {
                 this.translate(e)
-              }} value='fa'>Persian</button>
+              }} value='fa' data-name="Iran (Islamic Republic of)">Farsi</button>
               <button className="button is-outlined" onClick={(e) => {
                 this.translate(e)
-              }} value='hu'>Hungarian</button>
+              }} value='hu' data-name="Hungary">Hungarian</button>
               <button className="button is-outlined" onClick={(e) => {
                 this.translate(e)
-              }} value='is'>Icelandic</button>
+              }} value='is' data-name="Iceland">Icelandic</button>
               <button className="button is-outlined" onClick={(e) => {
                 this.translate(e)
-              }} value='nl'>Dutch</button>
+              }} value='nl' data-name="Netherlands">Dutch</button>
               <button className="button is-outlined" onClick={(e) => {
                 this.translate(e)
-              }} value='th'>Thai</button>
+              }} value='th' data-name="Thailand">Thai</button>
               <button className="button is-outlined" onClick={(e) => {
                 this.translate(e)
-              }} value='sv'>Swedish</button>
+              }} value='sv' data-name="Sweden">Swedish</button>
               <button className="button is-outlined" onClick={(e) => {
                 this.translate(e)
-              }} value='cs'>Czech</button>
+              }} value='cs' data-name="Czech Republic">Czech</button>
 
             </div>
           </div>

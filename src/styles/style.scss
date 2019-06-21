@@ -1,3 +1,5 @@
+// @import '~mapbox-gl/dist/mapbox-gl.css'
+
 .hero-body {
   background-image: url('https://s1.1zoom.me/big0/921/389926-svetik.jpg');
   background-repeat: no-repeat;
@@ -15,4 +17,17 @@
 .hero-header{
   background-color: Azure;
   font-size: 12px;
+}
+.flagImage{
+  height: 30px;
+  // width: 60px;
+  border: 1px solid black;
+}
+.emptyFlag{
+    height: 30px;
+}
+
+
+.map {
+
 }
