@@ -20,13 +20,12 @@ class App extends React.Component {
       data: [
         'Where is the Police?',
         'Thank you, but no thank you.',
-        'Can you go away I am on holiday.',
         'Can I borrow your wifi?',
         'Which one is your spiciest dish?',
         'Dogs are better than Cats. Change my mind.',
         'That is a heavy bag of rubbish.',
         'I am chuffed to bits, like this cat right here.',
-        'Can I have a Caramel Ice Latte and the Smoked Salmon Baguette?',
+        'Can I have a Caramel Iced Latte and the Smoked Salmon Baguette?',
         'Blimey, that is a lot of ice cream.',
         'Your house is exquisite.',
         'What do you mean, there is no tap water?',
@@ -35,7 +34,10 @@ class App extends React.Component {
         'You are such an amazing human being.',
         'Hold my beer.',
         'It is not yet Christmas.',
-        'The Zebra ran away as the Hunter went for a piss.'
+        'A very aesthetically pleasing salad.',
+        'I prefer to listen to classical music and read a book this evening.',
+        'A very strong response for a minor inconvenience.',
+        'That is another story'
       ],
       phrase: 'Where is the Police?',
       translated: '-',
@@ -85,16 +87,11 @@ class App extends React.Component {
     this.setState({phrase: newPhrase})
   }
 
-  // handleClick(){
-  //   return
-  // }
-
   getCountriesData(){
     axios.get('https://restcountries.eu/rest/v2/all')
       .then(res => this.setState({ countries: res.data }))
       .catch(err => console.log(err))
   }
-
 
   componentDidMount(){
     console.log(this.state.countryName)
@@ -117,7 +114,7 @@ class App extends React.Component {
           <div className="hero-body">
             <div className="container ">
               <h1 className="title has-text-centered is-size-1 has-text-light">
-                Random Phrases Translator🌍
+                Random Phrase Translator🌍
               </h1>
               <h2 className="subtitle has-text-centered is-size-3 has-text-light">
                 Generate a phrase or write your own
@@ -164,7 +161,7 @@ class App extends React.Component {
               >
               </textarea>
               <div className="has-text-centered">
-                <button type="submit" className="button is-outlined" onClick={(e) =>{
+                <button type="submit" className="button has-text-weight-bold has-text-grey is-outlined " onClick={(e) =>{
                   this.handleSubmit(e)
                 }}>Submit
                 </button>
@@ -266,7 +263,6 @@ class App extends React.Component {
       </main>
     )
   }
-
 }
 
 
