@@ -59,7 +59,7 @@ class App extends React.Component {
 
   translate(e){
     e.persist()
-    axios.get('https://cors-anywhere.herokuapp.com/https://translate.yandex.net/api/v1.5/tr.json/translate', {
+    axios.get('https://translate.yandex.net/api/v1.5/tr.json/translate', {
       params: {
         key: yandexKey,
         lang: `en-${e.target.value}`,
