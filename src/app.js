@@ -4,12 +4,7 @@ import axios from 'axios'
 import './styles/style.scss'
 import 'bulma'
 
-
-// import Phrases from './components/Phrases'
-// import PickLanguage from './components/PickLanguage'
-
 const yandexKey = process.env.KEY
-console.log(yandexKey)
 
 
 class App extends React.Component {
