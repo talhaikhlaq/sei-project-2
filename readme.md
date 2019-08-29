@@ -36,14 +36,14 @@ After signing up, the Yandex service requires a key (given to me during sign up)
 
 ![](pics/languages.png)
 
-###### Wins
+## Wins
 
 I'm really happy with the outcome. As it achieves the result I wanted. Adding the second API for the flags are a great addition to the presentation.
 
-###### Challenges
+## Challenges
 
 Certain countries have very distinct names as opposed to their commonly-known names for the restcountries API, such as South Korea as Korea(Republic of) and Iran as Iran (Islamic Republic of) which caused some confusion.
 
-###### Future Improvements
+## Future Improvements
 
 Further additions such as an interactive map that puts a marker on the country selected would be a nice addition. A less random phrase selector could also fix the issue that you could see previously seen phrases multiple times without seeing the rest.
