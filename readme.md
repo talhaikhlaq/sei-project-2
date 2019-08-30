@@ -30,7 +30,7 @@ I'm very interested in different languages and have always wanted to know how ea
 Pick a new random phrase or write your own words/sentence.
 Press on the language to be translated into.
 
-## Stack Overview
+## Stack Overview/Process
 
 ##### APIs
 
